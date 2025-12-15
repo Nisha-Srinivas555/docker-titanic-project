@@ -1,0 +1,22 @@
+# official Jupyter base image
+FROM jupyter/base-notebook:latest
+
+# Switching to root to install system packages
+USER root
+
+# Instalation of Python data packages
+RUN pip install --no-cache-dir \
+    pandas \
+    numpy \
+    sqlalchemy \
+    psycopg2-binary \
+    matplotlib \
+    seaborn \
+    scikit-learn
+
+
+# Switching back to the Jupyter user
+USER $NB_UID
+
+# Set default working directory
+WORKDIR /home/jovyan/work
